@@ -1,0 +1,21 @@
+version: "2"
+services:
+  hover-dns-updater:
+    image: davehahn/hover-dns-updater
+    environment:
+      USERNAME: "${DOCKER_USER}"
+      PASSWORD: "${DOCKER_PASSWORD}"
+      TOPTKEY: "${TOPTKEY}"
+      DNS1: "${DNS1}"
+      DNS2: "${DNS2}"
+      LOGFILE: "/logs/docker-hover-dns-updater.log"
+    stdin_open: true
+    working_dir: /hover-dns-updater
+    volumes:
+      - ${LOGFILE_PATH}:/logs
+    tty: true
+    command:
+      - python
+      - hover-dns-updater.py
+      - --service
+    restart: unless-stopped

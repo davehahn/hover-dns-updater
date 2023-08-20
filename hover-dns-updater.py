@@ -83,7 +83,7 @@ class HoverConfig(object):
         if self.LOGFILE == 'ENV':
             self.LOGFILE = os.environ['LOGFILE']
         if self.TOPTKEY == 'ENV':
-            self.LOGFILE = os.environ['TOPTKEY']
+            self.TOPTKEY = os.environ['TOPTKEY']
         if len(self.DNS_IDS) == 1 and self.DNS_IDS[0] == 'ENV':
             self.DNS_IDS = []
             i = 1
@@ -128,7 +128,7 @@ class HoverAPI(object):
         
         params = {"password" : self._config.PASSWORD ,"username" : self._config.USERNAME, "token" : None }
         r = requests.post("https://www.hover.com/signin/auth.json", json=params, cookies=self._cookies)
-
+       
         topt = pyotp.TOTP(self._config.TOPTKEY)
         params = {"code": topt.now()}
         r = requests.post("https://www.hover.com/signin/auth2.json", json=params, cookies=self._cookies)
@@ -245,7 +245,7 @@ def _main(config):
             if not config.SERVICE:
                 break
 
-            logging.debug('Sleeping.... Z Z Z Z')
+            logging.info("Sleeping for %s seconds" % config.POLLTIME)
             time.sleep(config.POLLTIME)
         except KeyboardInterrupt:
             logging.info('Exiting from Control-C')
