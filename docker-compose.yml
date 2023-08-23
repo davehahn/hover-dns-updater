@@ -3,8 +3,8 @@ services:
   hover-dns-updater:
     image: davehahn/hover-dns-updater
     environment:
-      USERNAME: "${DOCKER_USER}"
-      PASSWORD: "${DOCKER_PASSWORD}"
+      USERNAME: "${HOVER_USER}"
+      PASSWORD: "${HOVER_PASSWORD}"
       TOPTKEY: "${TOPTKEY}"
       DNS1: "${DNS1}"
       DNS2: "${DNS2}"
